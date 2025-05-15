@@ -1,0 +1,83 @@
+
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8">
+  <title>C&H Wedding 查座位</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      background-color: #a30000;
+      color: #fff;
+      margin: 0;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+    }
+
+    .container {
+      max-width: 600px;
+    }
+
+    .logo {
+      width: 200px;
+      max-width: 90%;
+      margin-bottom: 2rem;
+    }
+
+    input {
+      padding: 0.5rem;
+      font-size: 1rem;
+      width: 300px;
+      max-width: 90%;
+      border: none;
+      border-radius: 5px;
+    }
+
+    button {
+      padding: 0.5rem 1rem;
+      font-size: 1rem;
+      margin-left: 1rem;
+      cursor: pointer;
+      background-color: #fff;
+      color: #a30000;
+      border: none;
+      border-radius: 5px;
+    }
+
+    #result {
+      margin-top: 2rem;
+      font-size: 1.25rem;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <img src="logo_transparent.png" alt="Wedding Logo" class="logo">
+    <h1>C&H Wedding 座位查詢</h1>
+    <p>請輸入您的姓名：</p>
+    <input type="text" id="nameInput" placeholder="例如：王小明">
+    <button onclick="searchGuest()">查詢</button>
+    <div id="result"></div>
+  </div>
+
+  <script>
+    const guestList = [...]; // 略，已於前段詳細列出
+    function searchGuest() {
+      const name = document.getElementById('nameInput').value.trim();
+      const matches = guestList.filter(g => g.姓名.includes(name));
+      const resultDiv = document.getElementById('result');
+      if (matches.length > 0) {
+        const resultsHtml = matches.map(match =>
+          `🎉 ${match.姓名}，您的座位是：<br>桌號：${match.桌號}<br>桌名：${match.桌名}`
+        ).join("<br><br>");
+        resultDiv.innerHTML = resultsHtml;
+      } else {
+        resultDiv.innerHTML = `❌ 查無「${name}」的座位資料，請確認是否輸入正確全名`;
+      }
+    }
+  </script>
+</body>
+</html>
